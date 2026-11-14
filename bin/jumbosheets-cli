@@ -1,0 +1,97 @@
+#!/usr/bin/env node
+/**
+ * jumbosheets-cli v1.0.0
+ * Low-Vision 28pt Senior Large-Print Puzzle & Multi-Sheet Poster Geometry CLI
+ * Official reference utility for https://jumbosheets.com
+ * License: MIT
+ */
+
+const ROUTES = [
+  {
+    "name": "JumboSheets Home",
+    "url": "https://jumbosheets.com/"
+  },
+  {
+    "name": "Jumbo 9-Sheet Giant Wall Word Search Poster PDF",
+    "url": "https://jumbosheets.com/giant-wall-poster"
+  },
+  {
+    "name": "28pt Large Print Word Search Printable for Seniors",
+    "url": "https://jumbosheets.com/large-print-word-search"
+  },
+  {
+    "name": "Large Print 6x6 & 9x9 Sudoku Printable Grids",
+    "url": "https://jumbosheets.com/large-print-sudoku"
+  },
+  {
+    "name": "Large Print Senior Crossword Puzzles (Easy High-Contrast PDF)",
+    "url": "https://jumbosheets.com/large-print-crossword"
+  },
+  {
+    "name": "Calm 28pt Printable Cognitive Activities for Dementia Care",
+    "url": "https://jumbosheets.com/dementia-activities"
+  }
+];
+
+const SPECS = [
+  {
+    "Format Preset": "Standard Large Print",
+    "Body / Grid Font Size": "20 pt sans-serif",
+    "Grid Cell Pitch": "14.0 mm x 14.0 mm",
+    "Contrast Ratio (Black on Uncoated)": ">= 14.5 : 1 (100% K ink)",
+    "Target Use Case": "Independent senior leisure"
+  },
+  {
+    "Format Preset": "Jumbo Senior Dignity",
+    "Body / Grid Font Size": "28 pt bold humanist",
+    "Grid Cell Pitch": "18.5 mm x 18.5 mm",
+    "Contrast Ratio (Black on Uncoated)": ">= 16.0 : 1 (zero greyscale)",
+    "Target Use Case": "Macular degeneration / low vision"
+  },
+  {
+    "Format Preset": "Calm Memory Care",
+    "Body / Grid Font Size": "28 pt + 1.6x tracking",
+    "Grid Cell Pitch": "21.0 mm (6x6 grid)",
+    "Contrast Ratio (Black on Uncoated)": ">= 16.0 : 1 (zero juvenile clipart)",
+    "Target Use Case": "Cognitive & dementia engagement"
+  },
+  {
+    "Format Preset": "3x3 Giant Wall Poster",
+    "Body / Grid Font Size": "72 pt - 96 pt display",
+    "Grid Cell Pitch": "9-sheet tiled assembly",
+    "Contrast Ratio (Black on Uncoated)": "12.7 mm glue-tab registration",
+    "Target Use Case": "Activity room group word search"
+  }
+];
+
+const args = process.argv.slice(2);
+
+if (args.includes('--version') || args.includes('-v')) {
+  console.log('jumbosheets-cli v1.0.0 (https://jumbosheets.com)');
+  process.exit(0);
+}
+
+if (args.includes('--routes')) {
+  console.log(JSON.stringify({ domain: 'jumbosheets.com', endpoints: ROUTES }, null, 2));
+  process.exit(0);
+}
+
+if (args.includes('--specs') || args.includes('--json')) {
+  console.log(JSON.stringify({ domain: 'jumbosheets.com', benchmark: "Low-Vision Print Accessibility & Multi-Sheet Tiling Specifications", rows: SPECS }, null, 2));
+  process.exit(0);
+}
+
+console.log([
+  'JumboSheets CLI (jumbosheets-cli v1.0.0)',
+  'Low-Vision 28pt Senior Large-Print Puzzle & Multi-Sheet Poster Geometry CLI',
+  'Homepage: https://jumbosheets.com',
+  '',
+  'Usage:',
+  '  jumbosheets-cli --help       Show command overview and verified endpoints',
+  '  jumbosheets-cli --version    Print CLI version',
+  '  jumbosheets-cli --specs      Output domain technical specification matrix as JSON',
+  '  jumbosheets-cli --routes     Output verified production URLs as JSON',
+  '',
+  'Verified Production Endpoints:',
+  ...ROUTES.map((r) => '  - ' + r.name + ': ' + r.url),
+].join('\n'));
